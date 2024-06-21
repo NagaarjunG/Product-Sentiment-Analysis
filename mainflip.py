@@ -15,12 +15,12 @@ print("Current working directory:", os.getcwd())
 
 # Step 1: Load CSV files
 csv_files = [
-    'Asus Zenfone_reviews.csv',
-    'Micromax Canvas Pro_reviews.csv',
-    'Micromax Dual 4_reviews.csv',
-    'Motorola Edge 50_reviews.csv',
-    'Oneplus Nord 3- 5G_reviews.csv',
-    'Samsung Galaxy z flip 5G_reviews.csv'
+    'csv-1',
+    'csv-2',
+    'csv-3',
+    'csv-4',
+    'csv-5',
+    'csv-6'
 ]
 
 def extract_product_name(dataframe):
