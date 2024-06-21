@@ -1,4 +1,4 @@
-# Product-Sentiment-Analysis
+# Product-Sentiment-Analysis  AND  WEB Scarpping from online platform
 
 
 # Overview
@@ -40,3 +40,46 @@ Customization: Feel free to customize the app's thresholds, visualizations, or s
 # Contributing
 
 Contributions are welcome! If you find any issues or have suggestions for improvements...feel free to reach out me!!!
+
+
+
+
+# This Python script uses Selenium to scrape product reviews from online platform and saves them into a CSV file.
+
+# Overview
+The script automates the process of extracting reviews, ratings, likes, and dislikes for a given product URL on online platform. It iterates through multiple pages of reviews, clicks on "READ MORE" links to expand review texts, and handles pagination to collect all available data.
+
+# Requirements
+
+Python 3.x
+Selenium
+pandas
+numpy
+Chrome WebDriver
+Ensure you have installed the necessary Python packages listed in requirements.txt. Also, download the Chrome WebDriver and adjust the path in the script accordingly.
+
+
+# Output
+
+The script will generate a CSV file named <product_name>_reviews.csv containing extracted reviews, ratings, likes, and dislikes.
+
+# Script Details
+
+WebDriver Initialization: Uses Chrome WebDriver to automate browsing.
+Data Extraction: Extracts review texts, ratings, likes, and dislikes from Flipkart product pages.
+Data Cleaning: Cleans special characters and handles missing data using pandas and numpy.
+
+# Notes
+Adjust the time.sleep() intervals as needed based on network speed and page loading times.
+Ensure compliance with Flipkart's terms of service and use the script responsibly.
+
+# Example usage
+
+# product_url = "https://www.online.com/product-reviews/product-id"
+# product_name = "Product Name"
+# scrape_flipkart_reviews(product_url, product_name)
+
+
+
+
+
