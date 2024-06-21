@@ -108,30 +108,10 @@ def scrape_flipkart_reviews(url, product_name):
 
 
 # Example usage
-# product_url_1 = "https://www.flipkart.com/nothing-phone-2a-5g-blue-256-gb/product-reviews/itm85c6bca5edadc?pid=MOBHY8KMR8FZBUZE&lid=LSTMOBHY8KMR8FZBUZEYOP2WH&marketplace=FLIPKART&page=1"
-# product_name_1 = "Nothing Phone 2a"
+ product_url_1 = "https://www.flipkart.com/product linkFLIPKART&page=1"
+ product_name_1 = "Mobile Name"
 
-# product_url_2 = "https://www.flipkart.com/oneplus-nord-3-5g-misty-green-128-gb/product-reviews/itm5fc87afce35dc?pid=MOBGRKA2GBGGS6QZ&lid=LSTMOBGRKA2GBGGS6QZKZQXM2&marketplace=FLIPKART&page=1"
-# product_name_2 = "Oneplus Nord 3- 5G"
 
-# product_url_3 = "https://www.flipkart.com/samsung-galaxy-z-flip3-5g-cream-128-gb/product-reviews/itmf84b792824408?pid=MOBG6YQHHB84XVGN&lid=LSTMOBG6YQHHB84XVGNXUIVZP&marketplace=FLIPKART&page=1"
-# product_name_3 = "Samsung Galaxy z flip 5G"
-
-# product_url_4 = "https://www.flipkart.com/motorola-edge-50-fusion-marshmallow-blue-256-gb/product-reviews/itmd2b59acc725cf?pid=MOBGXTYZBAS4VM8K&lid=LSTMOBGXTYZBAS4VM8KX6T7CM&marketplace=FLIPKART&page=1"
-# product_name_4 = "Motorola Edge 50"
-
-# product_url_5 = "https://www.flipkart.com/iqoo-z7-pro-5g-graphite-matte-256-gb/product-reviews/itm483b74cd6f587?pid=MOBGTBFHY3K5EMWZ&lid=LSTMOBGTBFHY3K5EMWZZ8MGSQ&marketplace=FLIPKART&page=1"
-# product_name_5 = "IQoo z7 Pro 5G"
-
-# product_url_6 = "https://www.flipkart.com/micromax-dual-4-champagne-64-gb/product-reviews/itmeuycwffsnvkjs?pid=MOBF67WYVKGKWPTS&lid=LSTMOBF67WYVKGKWPTSGM6UFK&marketplace=FLIPKART&page=1"
-# product_name_6 = "Micromax Dual 4"
-
-# scrape_flipkart_reviews(product_url_1, product_name_1)
-# scrape_flipkart_reviews(product_url_2, product_name_2)
-# scrape_flipkart_reviews(product_url_3, product_name_3)
-# scrape_flipkart_reviews(product_url_4, product_name_4)
-# scrape_flipkart_reviews(product_url_5, product_name_5)
-# scrape_flipkart_reviews(product_url_6, product_name_6)
 
 
 
