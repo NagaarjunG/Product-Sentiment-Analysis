@@ -66,7 +66,9 @@ The script will generate a CSV file named <product_name>_reviews.csv containing 
 # Script Details
 
 WebDriver Initialization: Uses Chrome WebDriver to automate browsing.
+
 Data Extraction: Extracts review texts, ratings, likes, and dislikes from Flipkart product pages.
+
 Data Cleaning: Cleans special characters and handles missing data using pandas and numpy.
 
 # Notes
