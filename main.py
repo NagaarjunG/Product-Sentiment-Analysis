@@ -123,90 +123,102 @@ def compare_product_sentiments(query):
 
     return sentiments_summary
 
-# Step 5: Streamlit App
+
 def main():
     """Main function to run the Streamlit app."""
-    st.image("Text.png", use_column_width=True)
-    st.title('Product Sentiment Analysis')
+    # Set the page config
+    st.set_page_config(
+        page_title="Product Sentiment Analysis",
+        page_icon="📊",
+        layout="wide"
+    )
 
-    user_query = st.text_input('Enter your query:')
+    # Custom CSS for styling (optional)
+    st.markdown("""
+    <style>
+        .main {
+            background-color: #f0f2f6;
+            padding: 2em;
+        }
+        .title {
+            color: #1f77b4;
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+        .query-input {
+            font-size: 1.5em;
+            padding: 0.5em;
+            border: 2px solid #1f77b4;
+            border-radius: 5px;
+            margin-bottom: 1em;
+        }
+        .result-table {
+            background-color: #fff;
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+            margin-top: 1em;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.image("Mylogo.png", width=200)
+    st.markdown('<div class="title">Product Sentiment Analysis</div>', unsafe_allow_html=True)
+
+    # # Displaying the label with custom styling
+    st.markdown('<span style="color: #1f77b4; font-size: 1.2em;">Enter your query:</span>', unsafe_allow_html=True)
+
+    # Input query from the user
+    user_query = st.text_input('', placeholder='Type your query here...', key="query")
     if user_query:
         query_sentiment = analyze_sentiment(user_query)
         query_polarity = query_sentiment[0]  # Get polarity score of the query
-        print("Query Polarity:", query_polarity)
+        # st.write(f"**Query Polarity:** {query_polarity}")
 
         sentiment_results = compare_product_sentiments(user_query)
-        max_score = max(result["average_polarity"] for result in sentiment_results.values())
-
         if sentiment_results:
-            st.write("Sentiment Analysis Results:")
+            st.markdown('<h3 style="color: #1f77b4;">Sentiment Analysis Results:</h3>', unsafe_allow_html=True)
             best_product = None
-            if query_polarity >= 0:
-                max_positive_score = -float('inf')
-                for product, sentiment in sentiment_results.items():
-                    score = sentiment["average_polarity"]
-                    subjectivity = sentiment["average_subjectivity"]
-                    final_sentiment = sentiment["overall_sentiment"]
-                    positive_count = sentiment["Positive_Count"]
-                    negative_count = sentiment["Negative_Count"]
-                    neutral_count = sentiment["Neutral_Count"]
+            max_score = -float('inf') if query_polarity >= 0 else float('inf')
 
-                    subjectivity_label = interpret_subjectivity_score(subjectivity)
+            for product, sentiment in sentiment_results.items():
+                score = sentiment["average_polarity"]
+                subjectivity = sentiment["average_subjectivity"]
+                final_sentiment = sentiment["overall_sentiment"]
+                positive_count = sentiment["Positive_Count"]
+                negative_count = sentiment["Negative_Count"]
+                neutral_count = sentiment["Neutral_Count"]
 
-                    if score > max_positive_score:
-                        max_positive_score = score
-                        best_product = {
-                            "Product": product,
-                            "Sentiment_Analysis": final_sentiment,
-                            "Subjectivity": subjectivity_label,
-                            "Score": score,
-                            "Positive_Count": positive_count,
-                            "Negative_Count": negative_count,
-                            "Neutral_Count": neutral_count
-                        }
-
-            elif query_polarity < 0:
-                max_negative_score = float('inf')
-                for product, sentiment in sentiment_results.items():
-                    score = sentiment["average_polarity"]
-                    subjectivity = sentiment["average_subjectivity"]
-                    final_sentiment = sentiment["overall_sentiment"]
-                    positive_count = sentiment["Positive_Count"]
-                    negative_count = sentiment["Negative_Count"]
-                    neutral_count = sentiment["Neutral_Count"]
-
-                    subjectivity_label = interpret_subjectivity_score(subjectivity)
-
-                    if score < max_negative_score:
-                        max_negative_score = score
-                        best_product = {
-                            "Product": product,
-                            "Sentiment_Analysis": final_sentiment,
-                            "Subjectivity": subjectivity_label,
-                            "Score": score,
-                            "Positive_Count": positive_count,
-                            "Negative_Count": negative_count,
-                            "Neutral_Count": neutral_count
-                        }
+                if (query_polarity >= 0 and score > max_score) or (query_polarity < 0 and score < max_score):
+                    max_score = score
+                    best_product = {
+                        "Product": product,
+                        "Sentiment_Analysis": final_sentiment,
+                        "Score": score,
+                        "Positive_Count": positive_count,
+                        "Negative_Count": negative_count,
+                        "Neutral_Count": neutral_count
+                    }
 
             if best_product:
                 sentiment_summary = pd.DataFrame([best_product])
-                st.write(sentiment_summary)
+                st.write(sentiment_summary.style.set_table_styles(
+                    [{'selector': 'th', 'props': [('background-color', '#1f77b4'), ('color', 'white')]}],
+                    overwrite=False
+                ).set_properties(**{'text-align': 'left'}).set_caption('Best Product Based on Sentiment Analysis'))
 
             # Visualization (optional): Bar chart of average polarities
             product_names = list(sentiment_results.keys())
             scores = [sentiment['average_polarity'] for sentiment in sentiment_results.values()]
 
-            fig, ax = plt.subplots(figsize=(10, 6))
-            ax.bar(product_names, scores, color='salmon')
-            ax.set_xlabel('Products')
-            ax.set_ylabel('Average Polarity')
-            ax.set_title('Average Polarity of Products')
-
-            # Set x-axis ticks and labels
-            ax.set_xticks(range(len(product_names)))
-            ax.set_xticklabels(product_names, rotation=45, ha='right')
-
+            st.markdown('<h3 style="color: #1f77b4;">Average Polarity of Products</h3>', unsafe_allow_html=True)
+            fig, ax = plt.subplots(figsize=(12, 6))
+            sns.barplot(x=product_names, y=scores, hue=product_names, palette="coolwarm", ax=ax, legend=False)
+            ax.set_xlabel('Products', fontsize=14)
+            ax.set_ylabel('Average Polarity', fontsize=14)
+            ax.set_title('Average Polarity of Products', fontsize=16)
+            plt.xticks(rotation=45, ha='right')
             st.pyplot(fig)
 
         else:
@@ -214,3 +226,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
