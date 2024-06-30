@@ -15,13 +15,12 @@ print("Current working directory:", os.getcwd())
 
 # Step 1: Load CSV files
 csv_files = [
-    'A-Realme 12 5G_reviews.csv',
-    'B-Poco F4 5G_reviews.csv',
-    'C-Xiaomi 11 lite 128GB_reviews.csv',
-    'D_Vivo v25 pro 5G_reviews.csv',
-    'E-Oppo reno 11 5G - E_reviews.csv',
-    'F-Redmi note 13pro 5G_reviews.csv',
-    'G-Oneplus Nord 3- 5G_reviews.csv'
+    'csv-1',
+    'csv-2',
+    'csv-3',
+    'csv-4',
+    'csv-5',
+    'csv-6'
 ]
 
 def fetch_product_name(df):
